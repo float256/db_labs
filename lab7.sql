@@ -64,18 +64,20 @@ ORDER BY lesson.id_subject;
 -- 5.Дать оценки студентов специальности ВМ по всем проводимым
 -- предметам с указанием группы, фамилии, предмета, даты.
 -- При отсутствии оценки заполнить значениями NULL поля оценки
-SELECT "group".name, student.name, subject.name, lesson.date, mark.mark FROM student
-    JOIN "group" on "group".id_group = student.id_group
-    JOIN lesson on "group".id_group = lesson.id_group
-    JOIN subject on subject.id_subject = lesson.id_subject
-    LEFT JOIN mark on student.id_student = mark.id_student
-    WHERE "group".id_group = 3;
+SELECT "group".name, student.name, subject.name, lesson.date, mark.mark
+FROM student
+         JOIN "group" on "group".id_group = student.id_group
+         JOIN lesson on "group".id_group = lesson.id_group
+         JOIN subject on subject.id_subject = lesson.id_subject
+         LEFT JOIN mark on student.id_student = mark.id_student
+WHERE "group".id_group = 3;
 
 -- 6.Всем студентам специальности ПС, получившим оценки меньшие
 -- 5 по предмету БД до 12.05, повысить эти оценки на 1 балл.
 UPDATE mark
 SET mark = mark + 1
-FROM student, lesson
+FROM student,
+     lesson
 WHERE (student.id_group = 1)
   AND (mark.mark != 5)
   AND (lesson.date < '2019-05-12');
