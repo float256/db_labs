@@ -1,0 +1,46 @@
+@model List<AthleteDto>
+
+@{
+  ViewData["Title"] = "All athletes";
+}
+
+<h1 class="display-6">All athletes</h1>
+<a class="btn btn-primary mb-4" asp-controller="Athlete" asp-action="AddPage" role="button">Add</a>
+
+@if (Model.Count > 0)
+{
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Pathronymic name</th>
+      <th scope="col">Sport type</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (AthleteDto athlete in Model)
+    {
+      <tr>
+        <th scope="row">@athlete.Id</th>
+        <td>@athlete.Name</td>
+        <td>@athlete.Surname</td>
+        <td>@athlete.PatronymicName</td>
+        <td>@athlete.SportName</td>
+        <td>
+          <form asp-controller="Athlete" asp-action="Delete">
+            <input type="hidden" name="id" value="@athlete.Id">
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table> 
+}
+else
+{
+  <p class="fs-3">Not found</p>
+}

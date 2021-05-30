@@ -1,0 +1,36 @@
+@model Tuple<List<Athlete>, List<Competition>>
+@{
+  ViewData["Title"] = "Add athlete performance";
+}
+
+<h1 class="display-6">Add athlete performance:</h1>
+
+<form asp-controller="AthletePerformance" asp-action="Add" method="post">
+  <div class="mb-3">
+    <label for="AthleteId" class="form-label">Athlete</label>
+    <select name="AthleteId" id="AthleteId" class="form-control" required>
+      @foreach (Athlete athlete in Model.Item1)
+      {
+        <option value="@athlete.Id">@athlete.Name @athlete.Surname @athlete.PatronymicName</option>
+      }
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="CompetitionId" class="form-label">Competition</label>
+    <select name="CompetitionId" id="CompetitionId" class="form-control" required>
+      @foreach (Competition competition in Model.Item2)
+      {
+        <option value="@competition.Id">@competition.Name</option>
+      }
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="PerformanceDate" class="form-label">Performance date</label>
+    <input type="date" id="PerformanceDate" name="PerformanceDate" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="Score" class="form-label">Score</label>
+    <input type="number" id="Score" name="Score" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

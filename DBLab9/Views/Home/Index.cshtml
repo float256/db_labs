@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Main Page";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Main page</h1>
+    <p>Select a table:</p>
+    
+    <div class="card h-25">
+        <ul class="list-group list-group-flush">
+              <a class="list-group-item" asp-controller="Athlete" asp-action="Index">
+                  Athlete
+              </a>
+              <a class="list-group-item" asp-controller="AthletePerformance" asp-action="Index">
+                  Athlete Performance
+              </a>
+              <a class="list-group-item" asp-controller="Competition" asp-action="Index">
+                  Competition
+              </a>
+              <a class="list-group-item" asp-controller="Sport" asp-action="Index">
+                  Sport Type
+              </a>
+              <a class="list-group-item" asp-controller="SportsComplex" asp-action="Index">
+                  SportsComplex
+              </a>
+        </ul>
+    </div>
+</div>

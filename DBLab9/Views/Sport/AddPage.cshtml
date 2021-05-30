@@ -1,0 +1,21 @@
+@model List<Sport>
+@{
+  ViewData["Title"] = "Add sport type";
+}
+
+<h1 class="display-6">Add sport type:</h1>
+
+<form asp-controller="Sport" asp-action="Add" method="post">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="IsOlympic" class="form-label">Is olympic?</label>
+    <select name="IsOlympic" id="IsOlympic" class="form-control" required>
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,31 @@
+@model List<Sport>
+@{
+  ViewData["Title"] = "Add athlete";
+}
+
+<h1 class="display-6">Add athlete:</h1>
+
+<form asp-controller="Athlete" asp-action="Add" method="post">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="Surname" class="form-label">Surname</label>
+    <input type="text" name="Surname" id="Surname" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="PatronymicName" class="form-label">PatronymicName</label>
+    <input type="text" id="PatronymicName" name="PatronymicName" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="SportId" class="form-label">Sport type</label>
+    <select name="SportId" id="SportId" class="form-control" required>
+      @foreach (Sport currSport in Model)
+      {
+        <option value="@currSport.Id">@currSport.Name</option>
+      }
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

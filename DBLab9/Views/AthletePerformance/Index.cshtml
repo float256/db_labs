@@ -1,0 +1,50 @@
+@model List<AthletePerformanceDto>
+
+@{
+  ViewData["Title"] = "All athlete performances";
+}
+
+<h1 class="display-6">All athlete performances</h1>
+<a class="btn btn-primary mb-4" asp-controller="AthletePerformance" asp-action="AddPage" role="button">Add</a>
+
+@if (Model.Count > 0)
+{
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Pathronymic name</th>
+      <th scope="col">Competition</th>
+      <th scope="col">Performance date</th>
+      <th scope="col">Score</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (AthletePerformanceDto athletePerformance in Model)
+    {
+      <tr>
+        <th scope="row">@athletePerformance.Id</th>
+        <td>@athletePerformance.AthleteName</td>
+        <td>@athletePerformance.AthleteSurname</td>
+        <td>@athletePerformance.AthletePatronymicName</td>
+        <td>@athletePerformance.CompetitionName</td>
+        <td>@athletePerformance.PerformanceDate</td>
+        <td>@athletePerformance.Score</td>
+        <td>
+          <form asp-controller="AthletePerformance" asp-action="Delete">
+            <input type="hidden" name="id" value="@athletePerformance.Id">
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}
+else
+{
+  <p class="fs-3">Not found</p>
+}

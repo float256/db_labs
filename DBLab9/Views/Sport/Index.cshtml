@@ -1,0 +1,49 @@
+@model List<Sport>
+
+@{
+  ViewData["Title"] = "All sport types";
+}
+
+<h1 class="display-6">All sport types</h1>
+<a class="btn btn-primary mb-4" asp-controller="Sport" asp-action="AddPage" role="button">Add</a>
+
+@if (Model.Count > 0)
+{
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Is olympic?</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Sport sport in Model)
+    {
+      <tr>
+        <th scope="row">@sport.Id</th>
+        <td>@sport.Name</td>
+        @if (sport.IsOlympic)
+        {
+          <td>Yes</td>
+        }
+        else
+        {
+          <td>No</td> 
+        }
+        <td>
+          <form asp-controller="Sport" asp-action="Delete">
+            <input type="hidden" name="id" value="@sport.Id">
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}
+else
+{
+  <p class="fs-3">Not found</p>
+}
