@@ -11,13 +11,16 @@ namespace DBLab9.Controllers
     {
         private readonly CompetitionRepository _competitionRepository;
         private readonly SportsComplexRepository _sportsComplexRepository;
+        private readonly AthletePerformanceRepository _athletePerformanceRepository;
         
         public CompetitionController(
             CompetitionRepository competitionRepository,
-            SportsComplexRepository sportsComplexRepository)
+            SportsComplexRepository sportsComplexRepository,
+            AthletePerformanceRepository athletePerformanceRepository)
         {
             _competitionRepository = competitionRepository;
             _sportsComplexRepository = sportsComplexRepository;
+            _athletePerformanceRepository = athletePerformanceRepository;
         }
         
         [HttpGet]
@@ -25,6 +28,15 @@ namespace DBLab9.Controllers
         {
             List<Competition> allCompetitions = _competitionRepository.GetAll();
             List<SportsComplex> allSportsComplexes = _sportsComplexRepository.GetAll();
+            Dictionary<int, int> numberOfParticipants = (
+                from athlete in _athletePerformanceRepository.GetAll()
+                group athlete by athlete.CompetitionId into athleteGroup
+                select new {
+                    CompetitionId = athleteGroup.Key,
+                    NumberOfParticipants = athleteGroup.Count()
+                }).ToDictionary(
+                    pair => pair.CompetitionId, 
+                    pair => pair.NumberOfParticipants);
             List<CompetitionDto> result = (from competition in allCompetitions
                 join sportsComplex in allSportsComplexes on competition.SportsComplexId equals sportsComplex.Id
                 select new CompetitionDto
@@ -33,7 +45,10 @@ namespace DBLab9.Controllers
                     Name = competition.Name,
                     StartDate = competition.StartDate,
                     EndDate = competition.EndDate,
-                    SportsComplexName = sportsComplex.Name
+                    SportsComplexName = sportsComplex.Name,
+                    NumberOfParticipants = numberOfParticipants.ContainsKey(competition.Id) 
+                        ? numberOfParticipants[competition.Id]
+                        : 0
                 }).ToList();
             return View(result);
         }
