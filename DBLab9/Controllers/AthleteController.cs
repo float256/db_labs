@@ -20,15 +20,20 @@ namespace DBLab9.Controllers
         }
         
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string nameQuery="", string surnameQuery="", string patronymicNameQuery="")
         {
-            List<Athlete> allAthletes = _athleteRepository.GetAll();
+            Func<Athlete, bool> predicate = (Athlete athlete) =>
+                ((nameQuery is null) || athlete.Name.Contains(nameQuery))
+                && ((surnameQuery is null) || athlete.Surname.Contains(surnameQuery))
+                && ((patronymicNameQuery is null) || athlete.PatronymicName.Contains(patronymicNameQuery));
+            List<Athlete> allAthletes = _athleteRepository.Get(predicate);
             List<Sport> allSports = _sportRepository.GetAll();
+            
             List<AthleteDto> result = (from athlete in allAthletes
                 join sport in allSports on athlete.SportId equals sport.Id
                 select new AthleteDto
                 {
-                    Id = athlete.Id,
+                    Id = athlete.Id,    
                     Name = athlete.Name,
                     Surname = athlete.Surname,
                     PatronymicName = athlete.PatronymicName,
