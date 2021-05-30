@@ -38,7 +38,6 @@ namespace DBLab9.Services.Repositories
         public void Update(Competition competition)
         {
             _context.Competitions.Update(competition);
-            _context.Entry(competition).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

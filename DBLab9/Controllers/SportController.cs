@@ -34,6 +34,19 @@ namespace DBLab9.Controllers
         }
         
         [HttpPost]
+        public IActionResult UpdatePage(int id)
+        {
+            return View(_sportRepository.Get(id));
+        }
+
+        [HttpPost]
+        public IActionResult Update(Sport sport)
+        {
+            _sportRepository.Update(sport);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             _sportRepository.Delete(id);

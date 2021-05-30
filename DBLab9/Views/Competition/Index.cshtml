@@ -17,6 +17,8 @@
       <th scope="col">Start date</th>
       <th scope="col">End date</th>
       <th scope="col">Sport complex</th>
+      <th scope="col">Number of participants</th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -29,10 +31,17 @@
         <td>@competition.StartDate</td>
         <td>@competition.EndDate</td>
         <td>@competition.SportsComplexName</td>
+        <td>@competition.NumberOfParticipants</td>
         <td>
           <form asp-controller="Competition" asp-action="Delete">
             <input type="hidden" name="id" value="@competition.Id">
             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form asp-controller="Competition" asp-action="UpdatePage">
+            <input type="hidden" name="id" value="@competition.Id">
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
           </form>
         </td>
       </tr>

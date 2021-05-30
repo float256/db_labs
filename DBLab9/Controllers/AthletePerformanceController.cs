@@ -62,6 +62,22 @@ namespace DBLab9.Controllers
         }
 
         [HttpPost]
+        public IActionResult UpdatePage(int id)
+        {
+            return View(new Tuple<AthletePerformance, List<Athlete>, List<Competition>>(
+                _athletePerformanceRepository.Get(id),
+                _athleteRepository.GetAll(),
+                _competitionRepository.GetAll()));
+        }
+        
+        [HttpPost]
+        public IActionResult Update(AthletePerformance athletePerformance)
+        {
+            _athletePerformanceRepository.Update(athletePerformance);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             _athletePerformanceRepository.Delete(id);

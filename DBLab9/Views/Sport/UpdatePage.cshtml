@@ -1,0 +1,30 @@
+@model Sport
+@{
+  ViewData["Title"] = "Update sport type";
+}
+
+<h1 class="display-6">Update sport type:</h1>
+
+<form asp-controller="Sport" asp-action="Update" method="post">
+  <input type="hidden" name="Id" id="Id" value="@Model.Id">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required>
+  </div>
+  <div class="mb-3">
+    <label for="IsOlympic" class="form-label">Is olympic?</label>
+    <select name="IsOlympic" id="IsOlympic" class="form-control" required>
+      @if (Model.IsOlympic)
+      {
+        <option value="true" selected>Yes</option>
+        <option value="false">No</option>
+      }
+      else
+      {
+        <option value="true">Yes</option>
+        <option value="false" selected>No</option>
+      }
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

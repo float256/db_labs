@@ -1,0 +1,41 @@
+@model Tuple<Athlete, List<Sport>>
+@{
+  Athlete athlete = Model.Item1;
+  List<Sport> allSportTypes = Model.Item2;
+  ViewData["Title"] = "Update athlete";
+}
+
+<h1 class="display-6">Update athlete:</h1>
+
+<form asp-controller="Athlete" asp-action="Update" method="post">
+  <input type="hidden" name="Id" id="Id" value="@athlete.Id">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control" value="@athlete.Name" required>
+  </div>
+  <div class="mb-3">
+    <label for="Surname" class="form-label">Surname</label>
+    <input type="text" name="Surname" id="Surname" class="form-control" value="@athlete.Surname" required>
+  </div>
+  <div class="mb-3">
+    <label for="PatronymicName" class="form-label">PatronymicName</label>
+    <input type="text" id="PatronymicName" name="PatronymicName" class="form-control" value="@athlete.PatronymicName" required>
+  </div>
+  <div class="mb-3">
+    <label for="SportId" class="form-label">Sport type</label>
+    <select name="SportId" id="SportId" class="form-control" required>
+      @foreach (Sport currSport in allSportTypes)
+      {
+        if (currSport.Id == athlete.SportId)
+        {
+          <option value="@currSport.Id" selected>@currSport.Name</option>
+        }
+        else
+        {
+          <option value="@currSport.Id">@currSport.Name</option>
+        }
+      }
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

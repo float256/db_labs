@@ -1,0 +1,43 @@
+@model Tuple<Competition, List<SportsComplex>>
+@{
+  Competition competition = Model.Item1;
+  List<SportsComplex> allSportsComplexes = Model.Item2;
+  ViewData["Title"] = "Update competition";
+}
+
+<h1 class="display-6">Update competition:</h1>
+
+<form asp-controller="Competition" asp-action="Update" method="post">
+  <input type="hidden" id="Id" name="Id" value="@competition.Id">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control" value="@competition.Name" required>
+  </div>
+  <div class="mb-3">
+    <label for="StartDate" class="form-label">Start date</label>
+    <input type="date" name="StartDate" id="StartDate" class="form-control"
+           value="@competition.StartDate.ToString(Constants.DefaultDateFormat)" required>
+  </div>
+  <div class="mb-3">
+    <label for="EndDate" class="form-label">End date</label>
+    <input type="date" name="EndDate" id="EndDate" class="form-control"
+           value="@competition.EndDate.ToString(Constants.DefaultDateFormat)" required>
+  </div>
+  <div class="mb-3">
+    <label for="SportsComplexId" class="form-label">Sports complex</label>
+    <select name="SportsComplexId" id="SportsComplexId" class="form-control" required>
+      @foreach (SportsComplex currSportsComplex in allSportsComplexes)
+      {
+        if (competition.SportsComplexId == currSportsComplex.Id)
+        {
+          <option value="@currSportsComplex.Id" selected>@currSportsComplex.Name</option>
+        }
+        else
+        {
+          <option value="@currSportsComplex.Id">@currSportsComplex.Name</option>
+        }
+      }
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

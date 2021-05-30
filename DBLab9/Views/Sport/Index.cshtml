@@ -16,6 +16,7 @@
       <th scope="col">Name</th>
       <th scope="col">Is olympic?</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -36,6 +37,12 @@
           <form asp-controller="Sport" asp-action="Delete">
             <input type="hidden" name="id" value="@sport.Id">
             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form asp-controller="Sport" asp-action="UpdatePage">
+            <input type="hidden" name="id" value="@sport.Id">
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
           </form>
         </td>
       </tr>

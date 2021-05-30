@@ -17,6 +17,7 @@
       <th scope="col">Address</th>
       <th scope="col">Capacity</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -31,6 +32,12 @@
           <form asp-controller="SportsComplex" asp-action="Delete">
             <input type="hidden" name="id" value="@sportsComplex.Id">
             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form asp-controller="SportsComplex" asp-action="UpdatePage">
+            <input type="hidden" name="id" value="@sportsComplex.Id">
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
           </form>
         </td>
       </tr>

@@ -40,7 +40,6 @@ namespace DBLab9.Services.Repositories
         public void Update(SportsComplex sportsComplex)
         {
             _context.SportsComplexes.Update(sportsComplex);
-            _context.Entry(sportsComplex).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

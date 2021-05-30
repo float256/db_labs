@@ -20,6 +20,7 @@
       <th scope="col">Performance date</th>
       <th scope="col">Score</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -37,6 +38,12 @@
           <form asp-controller="AthletePerformance" asp-action="Delete">
             <input type="hidden" name="id" value="@athletePerformance.Id">
             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form asp-controller="AthletePerformance" asp-action="UpdatePage">
+            <input type="hidden" name="id" value="@athletePerformance.Id">
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
           </form>
         </td>
       </tr>

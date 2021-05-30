@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DBLab9.Models.Domains;
@@ -63,6 +64,21 @@ namespace DBLab9.Controllers
         public IActionResult Add(Competition competition)
         {
             _competitionRepository.Add(competition);
+            return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public IActionResult UpdatePage(int id)
+        {
+            return View(new Tuple<Competition, List<SportsComplex>>(
+                _competitionRepository.Get(id),
+                _sportsComplexRepository.GetAll()));
+        }
+
+        [HttpPost]
+        public IActionResult Update(Competition competition)
+        {
+            _competitionRepository.Update(competition);
             return RedirectToAction("Index");
         }
         

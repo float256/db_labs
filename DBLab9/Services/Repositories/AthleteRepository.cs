@@ -39,7 +39,6 @@ namespace DBLab9.Services.Repositories
         public void Update(Athlete athlete)
         {
             _context.Athletes.Update(athlete);
-            _context.Entry(athlete).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
